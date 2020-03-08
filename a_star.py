@@ -11,13 +11,15 @@ class Node:
 
     def get_neighbors(self):
         # Collection of arrays representing the x and y displacement
+        rows = len(self.grid)
+        cols = len(self.grid[0])
         directions = [[1, 0], [1, 1], [0, 1], [1, -1], [0, -1], [-1, -1], [-1, 0], [-1, 1]]
         neighbors = []
         for direction in directions:
             neighbor_x = self.x  + direction[0]
             neighbor_y = self.y + direction[1]
             if neighbor_x >= 0 and neighbor_y >= 0 and neighbor_x < cols and neighbor_y < rows:
-                neighbors.append(grid[neighbor_y][neighbor_x])
+                neighbors.append(self.grid[neighbor_y][neighbor_x])
         return neighbors
 
 
@@ -46,7 +48,7 @@ for i in range(rows):
                 start = node
             elif not end:
                 end = node
-            
+
         row_nodes.append(node)
     grid.append(row_nodes)
 
@@ -91,12 +93,17 @@ def a_star(grid, start, end):
         current = lowest_f_score(open_set)
         open_set.remove(current)
         closed_set.append(current)
-        
+
         if current == end:
             return reconstruct_path(grid, came_from, current)
-        
+
         for neighbor in current.get_neighbors():
             if neighbor in closed_set or neighbor.type == 'wall':
+                continue
+            # If both adjacent nodes are walls, dont let it be searched
+            adj_node_1 = grid[current.y][neighbor.x]
+            adj_node_2 = grid[neighbor.y][current.x]
+            if adj_node_1.type == 'wall' and adj_node_2.type == 'wall':
                 continue
             tentative_g_score = current.g_score + distance(current, neighbor)
             if neighbor not in open_set:
