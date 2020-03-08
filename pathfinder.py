@@ -27,7 +27,7 @@ text3 = font.render('Start', False, WHITE)
 text4 = font.render('Undo', False, WHITE)
 text5 = font.render('Clear', False, WHITE)
 
-icon = pygame.image.load('icon.png')
+icon = pygame.image.load('./img/icon.png')
 pygame.display.set_icon(icon)
 pygame.display.set_caption('Pathfinder')
 
