@@ -3,7 +3,7 @@ Video demo: https://www.youtube.com/watch?v=YGfJPXLM9Jc
 
 <img src="img/example.png" height="200">
 
-This is a pathfinding algorithm written in Python and displayed on the Pygame engine. It uses the A* search algorithm and its goal is to find the shortest distance between any two points, avoiding any obstacles. Here the two endpoints are in dark blue, the wall nodes are in black, and the shortest path is shown in blue with a distance of about 38.63. This algorithm is guaranteed to find the shortest distance.
+This is a pathfinding algorithm written in Python and displayed on the Pygame engine. It uses the A* search algorithm and its goal is to find the shortest distance between any two points, avoiding any obstacles. In the diagram above, the two endpoints are in dark blue, the wall nodes are in black, and the shortest path is shown in light blue with a distance of about 38.63. This algorithm is guaranteed to find the shortest path.
 
 ## Table of Contents
 * [ Installation ](#installation)
@@ -21,7 +21,7 @@ Once it is installed, cd into the path-finder folder and run pathfinding.py usin
 
 <a name="a-star"></a>
 ## A* search algorithm
-Credit goes to [Wikipedia](*https://en.wikipedia.org/wiki/A*_search_algorithm) for providing the information to help me learn the algorithm.
+Credit to [Wikipedia](*https://en.wikipedia.org/wiki/A*_search_algorithm) for providing the information for the algorithm.
 
 A* is a search algorithm that is used to find the optimal path between two locations. It runs faster than Dijkstra's algorithm, and takes into account two properties to determine the search priority of the nodes: 
 
@@ -35,7 +35,7 @@ The A* algorithm uses two sets to keep track of the nodes. The closed set is use
 
 The algorithm has a very specific order to which the nodes should be searched, and this is what seperates A* from many of the other search algorithms. Each node is assigned an *f score*, found using the sum *g(n) + h(n)*. The function *g(n)*  is the distance travelled from the start node, and *h(n)* is a heuristic function, which estimates the distance between the start and goal node. The algorithm searches the node with the lowest f score that is in the open set.
 
-When a node is searched, it is immediately added to the closed set, and each of its neighbors is analyzed. When it encounters a neighbor that is already searched, if the current path is a shorter distance, then the path to the neighbor is rewritten. See the example below:
+When a node is searched, it is immediately added to the closed set, and each of its neighbors are analyzed. When it encounters a neighbor that is already searched, if the current path is a shorter distance, then the path to the neighbor is rewritten. See the example below:
 
 <img src="img/a_star_diagram.png" height=250>
 
@@ -54,9 +54,9 @@ Since node 2 has the lowest f score (5), it is searched next. The neigbors of no
 Now node 4 has the lowest f score of 5, so it is searched. Then, the goal node is analyzed, so then the program terminates. The optimal path by this algorithm is thus from node 1 to node 2 to node 4 to node 5.
 
 ### How it is used here
-In my program, each node that is not on the edges or cornes has eight neighbors. For any vertical or horizontal step, the algorithm records it as a distance of 1. For any diagonal step, the distance is recorded as the square root of 2.
+In the program, each node that is not on the edges or cornes has eight neighbors. For any vertical or horizontal step, the algorithm records it as a distance of 1. For any diagonal step, the distance is recorded as the square root of 2.
 
-For the sake of my program, the heuristic function *h(n)* calculates the shortest possible distance between the current node and the goal node, through horizontal, vertical, and diagonal steps. If *d(n)* is the actual shortest distance between the current node and the goal node, then the inequality *h(n) ≤ d(n)* always holds true.
+For the sake of this program, the heuristic function *h(n)* calculates the shortest possible distance between the current node and the goal node, through horizontal, vertical, and diagonal steps. If *d(n)* is the actual shortest distance between the current node and the goal node, then the inequality *h(n) ≤ d(n)* always holds true.
 
 Here is a proof that this algorithm always yields the shortest path. Consider the final step of the algorithm, where the goal node is searched. Then this must mean that the goal node has the lowest f score, however since the distance between the goal node and itself is zero, *h(n) = 0*, and *f(n) = g(n)*. This means that the f score is precisely the distance between the start node and goal node taking that path. Let this distance be *d*.
 
