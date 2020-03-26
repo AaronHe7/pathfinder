@@ -1,5 +1,5 @@
 # Pathfinder
-Video demo: https://www.youtube.com/watch?v=YGfJPXLM9Jc
+Video demo: https://youtu.be/MiYJMIFpbcw
 
 <img src="img/example.png" height="200">
 
